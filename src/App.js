@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import UserProfile from './UserProfile.jsx'
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import data from './data/users.json'
+import Default from './Default.jsx';
+import { List, ListItem, ListItemText, Typography } from '@mui/material';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+<div>
+<Router>
+
+<List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+  {data.validUserIds.map((userId =>
+      <ListItem key={userId} component={Link} to={`/profile/${userId}`}>
+      <ListItemText primary={<Typography variant="h6">{userId}</Typography>} />
+    </ListItem>
+  ))}
+</List>
+<Routes>
+  <Route path="/profile/:userId" element={<UserProfile />} />
+  <Route path="/profile/default" element={<Default />} />
+</Routes>
+</Router>
+</div>
+);
 }
 
+
+
 export default App;
+
