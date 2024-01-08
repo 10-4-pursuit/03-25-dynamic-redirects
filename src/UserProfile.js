@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import userData  from './data/users.json'
 import {useParams, useNavigate} from 'react-router-dom'
 
@@ -7,10 +7,14 @@ const UserProfile =() => {
     let navigate = useNavigate()
     const data = userData.validUserIds
 
-    if (!userId || !data.includes(userId)) {
+    
+    useEffect(() => {
+      if (!data.includes(userId)) {
         navigate('/profile/default')
-        return `User Profile: ${userId} not found.`;
+        // return `User Profile: ${userId} not found.`;
     }
+    }, [])
+
   return (
     <div>
         <h1>User Profile</h1>
