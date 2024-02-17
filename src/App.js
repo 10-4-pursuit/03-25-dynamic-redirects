@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import UserProfile from './UserProfile';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+import data from './data/users.json';
 import './App.css';
 
 function App() {
   return (
+    <Router>
+      <ul>
+        {data.validUserIds.map((userId) => (
+          <li key={userId}>
+            <Link to={`/users/${userId}`}>{userId}</Link>
+          </li>
+        ))}
+      
+      </ul>
+
+      <Routes>
+        <Route path="/users/:userId" element={<UserProfile />} />
+      </Routes>
+
+    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     
     </div>
+    </Router>
   );
 }
 
