@@ -1,23 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import usersData from './data/users.json'
+import { BrowserRouter as router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import UserProfile from './components/UserProfile';
+import Home from './components/Home';
 
 function App() {
+  const [users, setUsers] = useState(usersData.validUserIds);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile/:userId" element={<UserProfile users={users} />} />
+        </Routes>
+      </router>
     </div>
   );
 }
